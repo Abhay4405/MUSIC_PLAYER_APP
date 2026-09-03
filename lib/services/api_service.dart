@@ -1,12 +1,17 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import '../models/track.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://api.jamendo.com/v3.0';
-  static const String clientId = 'bc66595a';
+  static String get baseUrl => dotenv.env['JAMENDO_BASE_URL'] ?? 'https://api.jamendo.com/v3.0';
+  static String get clientId => dotenv.env['JAMENDO_CLIENT_ID'] ?? '';
 
   static Future<List<Track>> getTracks({int offset = 0, int limit = 20, String query = ''}) async {
+    if (clientId.isEmpty) {
+      throw Exception('JAMENDO_CLIENT_ID is missing from .env');
+    }
+
     final String endpoint = query.isEmpty
         ? '$baseUrl/tracks/?client_id=$clientId&format=json&limit=$limit&offset=$offset'
         : '$baseUrl/tracks/?client_id=$clientId&format=json&namesearch=${Uri.encodeComponent(query)}&limit=$limit&offset=$offset';
