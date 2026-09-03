@@ -1,17 +1,19 @@
-# musicplayerapp
+# Jamendo Music Player App
 
-A new Flutter project.
+A Flutter music player application built using the Jamendo Music API featuring track browsing, search, pagination, and synchronized audio playback.
 
-## Getting Started
+## Features
+* **Music Listing & Search**: Browse tracks with album art, artist info, and dynamic search querying[cite: 1].
+* **Pagination**: Offset-based lazy loading with duplicate request prevention and end-of-list handling[cite: 1].
+* **Audio Playback**: Persistent Mini Player, dedicated Now Playing screen, seek bar, and full controls (Play/Pause, Next/Prev)[cite: 1].
+* **UI States**: Clean handling of loading, error, and empty result states[cite: 1].
 
-This project is a starting point for a Flutter application.
+## Architecture & State Management
+* **Architecture**: Layered design separating Models, Services (API), State, and UI Widgets[cite: 1].
+* **State Management**: `Provider` (`ChangeNotifier`) for reactive UI updates and decoupled `just_audio` stream management[cite: 1].
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## API Configuration
+* **Base URL**: `https://api.jamendo.com/v3.0`[cite: 1]
+* Configure your Jamendo Client ID in `lib/services/api_service.dart`[cite: 1]:
+```dart
+static const String clientId = 'YOUR_JAMENDO_CLIENT_ID';
